@@ -49,10 +49,10 @@ current_date_time.getJD()
 current_date_time.getDate_from_JD(current_date_time.jd)
 mercury.update_planet_pos(current_date_time.jd)
 
-print "number = 31"
-print "jd, mer_x, mer_y, mer_z, ven_x, ven_y, ven_z, ear_x, ear_y, ear_z, mar_x, mar_y, mar_z, \
+print ("number = 31")
+print ("jd, mer_x, mer_y, mer_z, ven_x, ven_y, ven_z, ear_x, ear_y, ear_z, mar_x, mar_y, mar_z, \
            jup_x, jup_y, jup_z, sar_x, sat_y, say_z, urn_x, urn_y, urn_z, nep_x, nep_y, nep_z, \
-           plu_x, plu_y, plu_z, ss1_x, ss1_y, ss1_z, ss2_x, ss2_y, ss2_z"
+           plu_x, plu_y, plu_z, ss1_x, ss1_y, ss1_z, ss2_x, ss2_y, ss2_z")
 
 while current_date_time.jd < start_date_time.jd + stop_time_days:
 
