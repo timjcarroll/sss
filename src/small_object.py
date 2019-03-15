@@ -7,6 +7,7 @@ import dandtclass
 
 #---------------------------------------------------------------------------------------------------------------
 class small_object:
+      """Represents a simulated object that doesn't affect gravity"""
       def __init__(self,name,x_km,y_km,z_km,xd_kmps,yd_kmps,zd_kmps,mass_kg):
 
           self.name = name
