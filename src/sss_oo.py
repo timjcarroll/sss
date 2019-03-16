@@ -19,11 +19,11 @@ dt_days = (dt_inc_hours + dt_inc_mins/60.0 + dt_inc_secs/3600.0)/24.0
 dt_hours = dt_inc_hours + dt_inc_mins/60.0 + dt_inc_secs/3600.0
 dt_mins = dt_inc_hours*60.0 + dt_inc_mins + dt_inc_secs/60.0
 dt_secs = dt_inc_hours*3600.0 + dt_inc_mins*60.0 + dt_inc_secs
-stop_time_days = 5.0
+stop_time_days = 0.5
 
 mission_time_secs = 0.0e0
 
-print_dt_secs = 0.05*60.0*60.0
+print_dt_secs = 60.0*60.0
 print_dt_mins = print_dt_secs/60.0
 print_dt_hours = print_dt_mins/60.0
 print_dt_days = print_dt_hours/24.0
@@ -49,10 +49,22 @@ current_date_time.getJD()
 current_date_time.getDate_from_JD(current_date_time.jd)
 mercury.update_planet_pos(current_date_time.jd)
 
-print ("number = 31")
-print ("jd, mer_x, mer_y, mer_z, ven_x, ven_y, ven_z, ear_x, ear_y, ear_z, mar_x, mar_y, mar_z, \
-           jup_x, jup_y, jup_z, sar_x, sat_y, say_z, urn_x, urn_y, urn_z, nep_x, nep_y, nep_z, \
-           plu_x, plu_y, plu_z, ss1_x, ss1_y, ss1_z, ss2_x, ss2_y, ss2_z")
+mercury.planet_header_to_file()
+venus.planet_header_to_file()
+earth.planet_header_to_file()
+mars.planet_header_to_file()
+jupiter.planet_header_to_file()
+saturn.planet_header_to_file()
+uranus.planet_header_to_file()
+neptune.planet_header_to_file()
+pluto.planet_header_to_file()
+ss1.so_header_to_file()
+ss2.so_header_to_file()
+
+#print ("number = 31")
+#print ("jd, mer_x, mer_y, mer_z, ven_x, ven_y, ven_z, ear_x, ear_y, ear_z, mar_x, mar_y, mar_z, \
+#           jup_x, jup_y, jup_z, sar_x, sat_y, say_z, urn_x, urn_y, urn_z, nep_x, nep_y, nep_z, \
+#           plu_x, plu_y, plu_z, ss1_x, ss1_y, ss1_z, ss2_x, ss2_y, ss2_z")
 
 while current_date_time.jd < start_date_time.jd + stop_time_days:
 
@@ -77,21 +89,46 @@ while current_date_time.jd < start_date_time.jd + stop_time_days:
    if print_counter_days >= print_dt_days:
       print_counter_days = 0.0
 
-      print ("%20.9f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f \
-             %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f \
-             %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f \
-             %20.14f %20.14f %20.14f %20.14f" \
-             % ( current_date_time.jd, mercury.pos_km[0], mercury.pos_km[1], mercury.pos_km[2], \
-                                                  venus.pos_km[0],   venus.pos_km[1],   venus.pos_km[2], \
-                                                  earth.pos_km[0],   earth.pos_km[1],   earth.pos_km[2], \
-                                                   mars.pos_km[0],    mars.pos_km[1],    mars.pos_km[2], \
-                                                jupiter.pos_km[0], jupiter.pos_km[1], jupiter.pos_km[2], \
-                                                 saturn.pos_km[0],  saturn.pos_km[1],  saturn.pos_km[2], \
-                                                 uranus.pos_km[0],  uranus.pos_km[1],  uranus.pos_km[2], \
-                                                neptune.pos_km[0], neptune.pos_km[1], neptune.pos_km[2], \
-                                                  pluto.pos_km[0],   pluto.pos_km[1],   pluto.pos_km[2], \
-                                                    ss1.pos_km[0],     ss1.pos_km[1],     ss1.pos_km[2], \
-                                                    ss2.pos_km[0],     ss2.pos_km[1],     ss2.pos_km[2]))
+#      print ("%20.9f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f \
+#             %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f \
+#             %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f %20.14f \
+#             %20.14f %20.14f %20.14f %20.14f" \
+#             % ( current_date_time.jd, mercury.pos_km[0], mercury.pos_km[1], mercury.pos_km[2], \
+#                                                  venus.pos_km[0],   venus.pos_km[1],   venus.pos_km[2], \
+#                                                  earth.pos_km[0],   earth.pos_km[1],   earth.pos_km[2], \
+#                                                   mars.pos_km[0],    mars.pos_km[1],    mars.pos_km[2], \
+#                                                jupiter.pos_km[0], jupiter.pos_km[1], jupiter.pos_km[2], \
+#                                                 saturn.pos_km[0],  saturn.pos_km[1],  saturn.pos_km[2], \
+#                                                 uranus.pos_km[0],  uranus.pos_km[1],  uranus.pos_km[2], \
+#                                                neptune.pos_km[0], neptune.pos_km[1], neptune.pos_km[2], \
+#                                                  pluto.pos_km[0],   pluto.pos_km[1],   pluto.pos_km[2], \
+#                                                    ss1.pos_km[0],     ss1.pos_km[1],     ss1.pos_km[2], \
+#                                                    ss2.pos_km[0],     ss2.pos_km[1],     ss2.pos_km[2]))
+      mercury.planet_data_to_file()
+      venus.planet_data_to_file()
+      earth.planet_data_to_file()
+      mars.planet_data_to_file()
+      jupiter.planet_data_to_file()
+      saturn.planet_data_to_file()
+      uranus.planet_data_to_file()
+      neptune.planet_data_to_file()
+      pluto.planet_data_to_file()
+      ss1.so_data_to_file()
+      ss2.so_data_to_file()
+      
+
 
    else:
       print_counter_days = print_counter_days + dt_days
+      
+mercury.outfile.close()
+venus.outfile.close()
+earth.outfile.close()
+mars.outfile.close()
+jupiter.outfile.close()
+saturn.outfile.close()
+uranus.outfile.close()
+neptune.outfile.close()
+pluto.outfile.close()
+ss1.outfile.close()
+ss2.outfile.close()
