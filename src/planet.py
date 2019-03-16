@@ -294,6 +294,8 @@ class planet:
 
 #--------------------------------------------------------------------------------------------------------
       def update_planet_pos(self, jd):
+    #    Update Julian Date
+          self.current_jd = jd
     #     calculate number of centuries past j2000
           self.no_cty_past_j2000 = (jd - 2451545.0)/36525.0
     #     calculate the curve fit orbital parameters
@@ -431,5 +433,13 @@ class planet:
       def get_planet_gm(self):
           return self.gm_km3ps2
 #--------------------------------------------------------------------------------------------------------
-#-------------------------------------------------------------------------------------------------------
+      def planet_header_to_file(self):
+          self.outfile.write(self.name + "\n")
+          self.outfile.write("JD, X_km, Y_km, Z_km, Xd_km, Yd_km, Zd_km\n")
+#--------------------------------------------------------------------------------------------------------
+      def planet_data_to_file(self):   
+          self.outfile.write("%20.9f, %20.14f, %20.14f, %20.14f, %20.14f, %20.14f, %20.14f\n" \
+                                  % (self.current_jd, self.pos_km[0], self.pos_km[1],self.pos_km[2], \
+                                     self.vel_kmps[0], self.vel_kmps[1], self.vel_kmps[2]))
+#--------------------------------------------------------------------------------------------------------
 

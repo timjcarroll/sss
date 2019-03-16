@@ -236,6 +236,7 @@ class small_object:
 #-------------------------------------------------------------------------------------------------------------
       def update_states(self, cdat, dt_secs, sun, mer, ven, ear, mar, jup, sat, urn, nep, plu):
 
+          self.current_jd = cdat.jd
           self.calc_grav_from_bodies(cdat.jd, sun, mer, ven, ear, mar, jup, sat, urn, nep, plu, self.pos_km)
 
           self.k1_x = dt_secs*self.vel_kmps[0]
@@ -292,4 +293,11 @@ class small_object:
           self.vel_kmps[2] = self.vel_kmps[2] + ((self.k1_zd + 2.0*self.k2_zd + 2.0*self.k3_zd + self.k4_zd)/6.0)
 
 #-------------------------------------------------------------------------------------------------------------
-
+      def so_header_to_file(self):
+          self.outfile.write(self.name + "\n")
+          self.outfile.write("JD, X_km, Y_km, Z_km, Xd_km, Yd_km, Zd_km\n")
+#--------------------------------------------------------------------------------------------------------
+      def so_data_to_file(self):   
+          self.outfile.write("%20.9f, %20.14f, %20.14f, %20.14f, %20.14f, %20.14f, %20.14f\n" \
+                                  % (self.current_jd, self.pos_km[0], self.pos_km[1],self.pos_km[2], \
+                                     self.vel_kmps[0], self.vel_kmps[1], self.vel_kmps[2]))
