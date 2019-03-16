@@ -292,5 +292,4 @@ class small_object:
           self.vel_kmps[2] = self.vel_kmps[2] + ((self.k1_zd + 2.0*self.k2_zd + 2.0*self.k3_zd + self.k4_zd)/6.0)
 
 #-------------------------------------------------------------------------------------------------------------
-      def closefile(self):
-          self.outfile.close()
+

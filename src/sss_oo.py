@@ -96,14 +96,4 @@ while current_date_time.jd < start_date_time.jd + stop_time_days:
    else:
       print_counter_days = print_counter_days + dt_days
       
-mercury.closefile()
-venus.closefile()
-earth.closefile()
-mars.closefile()
-jupiter.closefile()
-saturn.closefile()
-uranus.closefile()
-neptune.closefile()
-pluto.closefile()
-ss1.closefile()
-ss2.closefile()
+
