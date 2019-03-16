@@ -12,6 +12,9 @@ class planet:
           self.pos_km = [0.0e0, 0.0e0, 0.0e0]
           self.vel_kmps = [0.0e0, 0.0e0, 0.0e0]
           self.name = name
+          extension = '.output'
+          filename = self.name + extension
+          self.outfile = open(filename, 'w')
            
           if   name == 'mercury':
                self.name = name
@@ -427,3 +430,6 @@ class planet:
 #--------------------------------------------------------------------------------------------------------
       def get_planet_gm(self):
           return self.gm_km3ps2
+#--------------------------------------------------------------------------------------------------------
+      def closefile(self):
+          self.outfile.close()

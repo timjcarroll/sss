@@ -33,7 +33,7 @@ class small_object:
 
           extension = '.output'
           filename = self.name + extension
-          self.f = open(filename, 'w')
+          self.outfile = open(filename, 'w')
 
 #--------------------------------------------------------------------------------------------------------------
       def calc_grav_from_bodies(self, jd, sun, mer, ven, ear, mar, jup, sat, urn, nep, plu, pos):
@@ -293,4 +293,4 @@ class small_object:
 
 #-------------------------------------------------------------------------------------------------------------
       def closefile(self):
-          self.f.close()
+          self.outfile.close()

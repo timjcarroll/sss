@@ -19,7 +19,7 @@ dt_days = (dt_inc_hours + dt_inc_mins/60.0 + dt_inc_secs/3600.0)/24.0
 dt_hours = dt_inc_hours + dt_inc_mins/60.0 + dt_inc_secs/3600.0
 dt_mins = dt_inc_hours*60.0 + dt_inc_mins + dt_inc_secs/60.0
 dt_secs = dt_inc_hours*3600.0 + dt_inc_mins*60.0 + dt_inc_secs
-stop_time_days = 5.0
+stop_time_days = 0.1
 
 mission_time_secs = 0.0e0
 
@@ -95,3 +95,15 @@ while current_date_time.jd < start_date_time.jd + stop_time_days:
 
    else:
       print_counter_days = print_counter_days + dt_days
+      
+mercury.closefile()
+venus.closefile()
+earth.closefile()
+mars.closefile()
+jupiter.closefile()
+saturn.closefile()
+uranus.closefile()
+neptune.closefile()
+pluto.closefile()
+ss1.closefile()
+ss2.closefile()
