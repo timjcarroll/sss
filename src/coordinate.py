@@ -39,7 +39,7 @@ class Vector:
             elif not len(sphr) == 3:
                 raise TypeError("sphr tuple must be length 3")
             else:
-                self.__computed == "spherical"
+                self.__computed = "spherical"
                 self.__r, self.__theta, self.__phi = sphr
 
     @property
@@ -52,19 +52,19 @@ class Vector:
         return self.__x, self.__y, self.__z
 
     @property
-    def x(self) -> float:
+    def x(self):
         """Cartesian x value."""
 
         return self.cartesian[0]
 
     @property
-    def y(self) -> float:
+    def y(self):
         """Cartesian y value."""
 
         return self.cartesian[1]
 
     @property
-    def z(self) -> float:
+    def z(self):
         """Cartesian z value."""
 
         return self.cartesian[2]
@@ -79,22 +79,165 @@ class Vector:
         return self.__r, self.__theta, self.__phi
 
     @property
-    def r(self) -> float:
+    def r(self):
         """Spherical r value."""
 
         return self.spherical[0]
 
     @property
-    def theta(self) -> float:
+    def theta(self):
         """Spherical theta value."""
 
         return self.spherical[1]
 
     @property
-    def phi(self) -> float:
+    def phi(self):
         """Spherical phi value."""
 
         return self.spherical[2]
+
+    def __abs__(self):
+        """abs() overload."""
+
+        return abs(self.r)
+
+    def __add__(self, other):
+        """+ overload.
+
+        If two :obj:`Vector` objects are passed, the Vectors are added per Cartesian element.
+        If one :obj:`Vector` object and one scalar are passed, the scalar is added to each Vector Cartesian element.
+        """
+
+        if type(other) is Vector:
+            return Vector(cart=(self.x + other.x, self.y + other.y, self.z + other.z))
+        else:  # assume scalar
+            return Vector(cart=(self.x + other, self.y + other, self.z + other))
+
+    def __radd__(self, other):
+        """Right-side + overload."""
+
+        return self.__add__(other)
+
+    def __complex__(self):
+        """complex() overload."""
+
+        return Vector(cart=(complex(self.x), complex(self.y), complex(self.z)))
+
+    def __divmod__(self, other):
+        """divmod() overload."""
+
+        return Vector(cart=(divmod(self.x, other), divmod(self.y, other), divmod(self.z, other)))
+
+    def __rdivmod__(self, other):
+        """Right-side divmod() overload."""
+
+        return Vector(cart=(divmod(other, self.x), divmod(other, self.y), divmod(other, self.z)))
+
+    def __eq__(self, other):
+        """== overload."""
+
+        return self.x == other.x and self.y == other.y and self.z == other.z
+
+    def __float__(self):
+        """float() overload."""
+
+        return Vector(cart=(float(self.x), float(self.y), float(self.z)))
+
+    def __floordiv__(self, other):
+        """// overload."""
+
+        return Vector(cart=(self.x // other, self.y // other, self.z // other))
+
+    def __rfloordiv__(self, other):
+        """Right-side // overload."""
+
+        return Vector(cart=(other // self.x, other // self.y, other // self.z))
+
+    def __int__(self):
+        """int() overload."""
+
+        return Vector(cart=(int(self.x), int(self.y), int(self.z)))
+
+    def __len__(self):
+        """len() overload."""
+
+        return 3
+
+    def __mod__(self, other):
+        """% overload."""
+
+        return Vector(cart=(self.x % other, self.y % other, self.z % other))
+
+    def __rmod__(self, other):
+        """Right-hand % overload."""
+
+        return Vector(cart=(other % self.x, other % self.y, other % self.z))
+
+    def __mul__(self, other):
+        """* overload."""
+
+        return Vector(cart=(self.x * other, self.y * other, self.z * other))
+
+    def __rmul__(self, other):
+        """Right-hand * overload."""
+
+        return self.__mul__(other)
+
+    def __ne__(self, other):
+        """!= overload."""
+
+        return not self == other
+
+    def __neg__(self):
+        """- overload."""
+
+        return Vector(cart=(-self.x, -self.y, -self.z))
+
+    def __pos__(self):
+        """+ overload."""
+
+        return Vector(cart=(+self.x, +self.y, +self.z))
+
+    def __pow__(self, power, modulo=None):
+        """** and pow() overload."""
+
+        return Vector(cart=(pow(self.x, power, modulo), pow(self.y, power, modulo), pow(self.z, power, modulo)))
+
+    def __rpow__(self, other):
+        """Right-hand * and pow() overload."""
+
+        return Vector(cart=(pow(other, self.x), pow(other, self.y), pow(other, self.x)))
+
+    def __str__(self):
+        """str() overload."""
+
+        return "<C: {}; S: {}>".format(self.cartesian, self.spherical)
+
+    def __sub__(self, other):
+        """- overload."""
+
+        if type(other) is Vector:
+            return Vector(cart=(self.x - other.x, self.y - other.y, self.z - other.z))
+        else:  # assume scalar
+            return Vector(cart=(self.x - other, self.y - other, self.z - other))
+
+    def __rsub__(self, other):
+        """Right-hand - overload."""
+
+        if type(other) is Vector:
+            return Vector(cart=(other.x - self.x, other.y - self.y, other.z - self.z))
+        else:  # assume scalar
+            return Vector(cart=(other.x - self, other.y - self, other.z - self))
+
+    def __truediv__(self, other):
+        """/ overload."""
+
+        return Vector(cart=(self.x / other, self.y / other, self.z / other))
+
+    def __rtruediv__(self, other):
+        """Right-hand / overload."""
+
+        return Vector(cart=(other / self.x, other / self.y, other / self.z))
 
     @staticmethod
     def __cartesian_to_spherical(cartesian: tuple) -> tuple:
