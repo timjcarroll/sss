@@ -1,5 +1,5 @@
 import math, csv, os, sys, string
-from pylab import *
+#from pylab import *
 
 class central_star:
 

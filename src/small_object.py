@@ -1,5 +1,5 @@
 import math, csv, os, sys, string
-from pylab import *
+#from pylab import *
 
 import planet
 import central_star
@@ -49,9 +49,9 @@ class small_object:
           plu.update_planet_pos(jd)
 
           #  Sun Accel Grav on Small Object
-          self.rx_sun_so = -1.0*pos[0]
-          self.ry_sun_so = -1.0*pos[1]
-          self.rz_sun_so = -1.0*pos[2]
+          self.rx_sun_so = pos[0]
+          self.ry_sun_so = pos[1]
+          self.rz_sun_so = pos[2]
           self.rmag_sun_so = math.sqrt(self.rx_sun_so*self.rx_sun_so + self.ry_sun_so*self.ry_sun_so + \
                                        self.rz_sun_so*self.rz_sun_so)
           self.ux_sun_so = self.rx_sun_so/self.rmag_sun_so
