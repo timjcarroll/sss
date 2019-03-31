@@ -1,7 +1,7 @@
 
 #!/usr/bin/python2.7
 import math, csv, os, sys, string
-from pylab import *
+#from pylab import *
 import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
